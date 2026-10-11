@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Название вкладки поменяет JavaScript, когда узнает, какая это карта -->
+    <title>Раскидки CS2</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Одна страница для ВСЕХ карт. Какую карту показать, написано в ссылке:
+         map.html?map=mirage, map.html?map=dust2 и т.д. -->
+    <main>
+        <!-- Ссылка обратно на главную -->
+        <a class="back-link" href="index.html">← Назад к картам</a>
+
+        <!-- Заголовок пустой — его заполнит JavaScript названием карты -->
+        <h1 class="map-title"></h1>
+        <p>Видео повторяются по кругу.</p>
+
+        <!-- Фильтры. data-type и data-side — наши собственные «пометки» на кнопках,
+             по ним JavaScript понимает, какая кнопка что фильтрует -->
+        <div class="filters">
+            <!-- Поле поиска. placeholder — серая подсказка, пока поле пустое -->
+            <input class="search" type="search" placeholder="Поиск: окно, мусорка, пальма...">
+
+            <div class="filter-group">
+                <button class="filter-button active" data-type="all">Все гранаты</button>
+                <button class="filter-button" data-type="smoke">Смоки</button>
+                <button class="filter-button" data-type="flash">Флешки</button>
+                <button class="filter-button" data-type="molotov">Молотовы</button>
+            </div>
+
+            <div class="filter-group">
+                <button class="filter-button active" data-side="all">Обе стороны</button>
+                <button class="filter-button" data-side="t">T</button>
+                <button class="filter-button" data-side="ct">КТ</button>
+            </div>
+        </div>
+
+        <!-- Пустая коробка для карточек. Их нарисует JavaScript из файла cards.js -->
+        <div class="lineup-grid"></div>
+    </main>
+
+    <!-- Подключаем JavaScript. Порядок важен: сначала данные, потом робот, который их рисует -->
+    <script src="data.js"></script>
+    <script src="cards.js"></script>
+</body>
+</html>

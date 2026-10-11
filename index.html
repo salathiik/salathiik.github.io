@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Сюда пишем служебную информацию. Её не видно на странице -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Раскидки CS2</title>
+    <!-- Подключаем шрифт Rubik из Google Fonts (он умеет русские буквы) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap">
+    <!-- Подключаем файл с оформлением -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- А всё, что внутри body, видно на странице -->
+
+    <!-- Шапка сайта -->
+    <header>
+        <h1>Привет, это я SaLathiC</h1>
+        <p>Здесь раскидки гранат CS2: смоки, флешки и молотовы с короткими видео.</p>
+    </header>
+
+    <!-- Основная часть: список карт -->
+    <main>
+        <!-- Блок «О сайте» -->
+        <section class="about">
+            <h2>О сайте</h2>
+            <!-- ✏️ Текст можно поменять на свой -->
+            <p>
+                Привет! Меня зовут SaLathiC, и я играю в CS2. Здесь я собираю раскидки гранат,
+                которые сам проверил в игре: смоки, флешки и молотовы. Под каждой раскидкой есть
+                короткое видео и описание: где встать, куда целиться и как кинуть.
+            </p>
+            <p>Сайт создан 10 октября 2026 года. Раскидки добавляются постоянно, так что заглядывай почаще!</p>
+
+            <!-- Статистика. Цифры посчитает JavaScript из файла home.js -->
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number" id="stat-total">0</span>
+                    <span class="stat-label">всего раскидок</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="stat-maps">0</span>
+                    <span class="stat-label">карт с раскидками</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="stat-smoke">0</span>
+                    <span class="stat-label">смоков</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="stat-flash">0</span>
+                    <span class="stat-label">флешек</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="stat-molotov">0</span>
+                    <span class="stat-label">молотовов</span>
+                </div>
+            </div>
+        </section>
+
+        <h2>Выбери карту</h2>
+
+        <!-- Пустая сетка для плиток карт. Их нарисует JavaScript из файла home.js -->
+        <nav class="map-grid"></nav>
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer>
+        <p>Сделано SaLathiC, 2026</p>
+    </footer>
+
+    <!-- Сначала данные, потом робот главной страницы -->
+    <script src="data.js"></script>
+    <script src="home.js"></script>
+</body>
+</html>
