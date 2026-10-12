@@ -43,6 +43,40 @@
         <div class="lineup-grid"></div>
     </main>
 
+    <!-- Мини-страничка раскидки. Сначала спрятана (hidden),
+         JavaScript показывает её по клику на карточку и заполняет данными -->
+    <div class="modal" hidden>
+        <div class="modal-window">
+            <button class="modal-close" aria-label="Закрыть">✕</button>
+
+            <!-- controls — кнопки плеера: пауза, перемотка, полный экран -->
+            <video class="modal-video" controls loop muted playsinline></video>
+
+            <div class="modal-info">
+                <h2 class="modal-title"></h2>
+                <div class="modal-tags"></div>
+                <p><b>Для чего:</b> <span class="modal-purpose"></span></p>
+                <p><b>Откуда:</b> <span class="modal-from"></span></p>
+                <p><b>Куда целиться:</b> <span class="modal-aim"></span></p>
+                <p><b>Как кинуть:</b> <span class="modal-how"></span></p>
+                <!-- Плашка «Взято у ...». Видна, только если у раскидки указан source -->
+                <p class="modal-source" hidden></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Карточка автора (ютубера). Открывается поверх мини-странички -->
+    <div class="author-popup" hidden>
+        <div class="author-window">
+            <button class="author-close" aria-label="Закрыть">✕</button>
+            <img class="author-photo" alt="">
+            <h3 class="author-name"></h3>
+            <p class="author-about"></p>
+            <!-- target="_blank" — открыть ссылку в новой вкладке, чтобы наш сайт не закрылся -->
+            <a class="author-channel" target="_blank" rel="noopener"></a>
+        </div>
+    </div>
+
     <!-- Подключаем JavaScript. Порядок важен: сначала данные, потом робот, который их рисует -->
     <script src="data.js"></script>
     <script src="cards.js"></script>

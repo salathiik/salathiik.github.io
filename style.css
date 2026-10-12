@@ -216,14 +216,25 @@ footer {
 /* Одна карточка раскидки */
 .lineup-card {
     background-color: #1e2228;
+    border: 2px solid transparent;      /* невидимый контур — станет белым при наведении */
     border-radius: 10px;
     overflow: hidden;
+    cursor: pointer;                    /* курсор-рука: «на меня можно нажать» */
+    transition: border-color 0.2s;      /* контур загорается плавно */
+}
+
+/* Наводишь мышку — контур загорается белым */
+.lineup-card:hover {
+    border-color: white;
 }
 
 /* Видео на всю ширину карточки */
 .lineup-card video {
     width: 100%;
     display: block;                     /* убирает маленькую щель под видео */
+    aspect-ratio: 16 / 9;               /* место под видео занято сразу, и страница не «прыгает» при загрузке */
+    object-fit: cover;
+    background-color: #000;
 }
 
 /* Текст под видео */
@@ -254,3 +265,191 @@ footer {
 .tag-molotov { background-color: #dc2626; color: white; }   /* красный */
 .tag-t       { background-color: #d97706; color: white; }   /* оранжевый — террористы */
 .tag-ct      { background-color: #2563eb; color: white; }   /* синий — спецназ */
+
+/* ===== Мини-страничка раскидки ===== */
+
+/* Тёмный полупрозрачный фон на весь экран */
+.modal {
+    position: fixed;                    /* «приклеен» к экрану и не прокручивается */
+    inset: 0;                           /* растянут на весь экран: сверху, справа, снизу, слева = 0 */
+    z-index: 100;                       /* поверх всего остального */
+    display: flex;
+    align-items: center;                /* окно по центру экрана */
+    justify-content: center;
+    padding: 16px;
+    background-color: rgba(0, 0, 0, 0.8);   /* чёрный, но на 80% непрозрачный */
+}
+
+/* hidden прячет элемент. Без этой строчки display: flex выше «перебил» бы hidden */
+.modal[hidden] {
+    display: none;
+}
+
+/* Само окно */
+.modal-window {
+    position: relative;                 /* чтобы крестик можно было поставить в его угол */
+    width: 100%;
+    max-width: 900px;
+    max-height: 100%;
+    overflow-y: auto;                   /* если окно не влезает по высоте — внутри появится прокрутка */
+    background-color: #1e2228;
+    border: 2px solid white;
+    border-radius: 12px;
+}
+
+/* Большое видео на всю ширину окна */
+.modal-video {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 9;
+    background-color: #000;
+}
+
+.modal-info {
+    padding: 16px 20px 20px;
+    line-height: 1.5;
+}
+
+.modal-info h2 {
+    margin: 0 0 8px;
+}
+
+/* Крестик в правом верхнем углу */
+.modal-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 1;                         /* поверх видео */
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;                 /* круглая кнопка */
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    background-color: #f5a623;
+    color: black;
+}
+
+/* ===== Автор раскидки ===== */
+
+/* Овальная плашка автора: маленькая аватарка + имя.
+   Видна сразу на карточке раскидки и в мини-страничке */
+.author-badge {
+    display: inline-flex;               /* аватарка и имя в одну строку */
+    align-items: center;
+    gap: 6px;
+    vertical-align: middle;
+    padding: 2px 10px 2px 2px;          /* слева меньше — там аватарка */
+    border: 1px solid #f5a623;
+    border-radius: 999px;               /* очень большое скругление = овал */
+    background-color: rgba(245, 166, 35, 0.15);   /* оранжевый, но почти прозрачный */
+    color: #f5a623;
+    font: inherit;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.author-badge:hover {
+    background-color: #f5a623;
+    color: black;
+}
+
+/* Круглая мини-аватарка внутри плашки */
+.author-badge img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+/* Тёмный фон под карточкой автора — как у мини-странички, но ещё выше (z-index 200) */
+.author-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.author-popup[hidden] {
+    display: none;
+}
+
+/* Сама карточка автора */
+.author-window {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    padding: 28px 24px 24px;
+    text-align: center;
+    background-color: #1e2228;
+    border: 2px solid white;
+    border-radius: 12px;
+}
+
+/* Круглая аватарка */
+.author-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #f5a623;
+    object-fit: cover;
+}
+
+.author-name {
+    margin: 12px 0 4px;
+    font-size: 24px;
+}
+
+.author-about {
+    color: #aaa;
+    line-height: 1.5;
+}
+
+/* Кнопка «Открыть канал на ...» */
+.author-channel {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Цвет кнопки — как у площадки */
+.channel-youtube         { background-color: #ff0000; }   /* красный YouTube */
+.channel-youtube:hover   { background-color: #cc0000; }
+.channel-rutube          { background-color: #100943; border: 1px solid #00a1e7; }   /* тёмно-синий Rutube */
+.channel-rutube:hover    { background-color: #00a1e7; }
+.channel-github          { background-color: #24292f; border: 1px solid #8b949e; }   /* тёмно-серый GitHub */
+.channel-github:hover    { background-color: #444c56; }
+
+/* Крестик — такой же, как у мини-странички */
+.author-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.author-close:hover {
+    background-color: #f5a623;
+    color: black;
+}
