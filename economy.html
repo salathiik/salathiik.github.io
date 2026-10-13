@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор экономики — CS2</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script src="nav.js"></script>
+
+    <main>
+        <h1>💰 Калькулятор экономики</h1>
+        <p class="tool-intro">
+            Введи, сколько у тебя денег и сколько раундов подряд проиграла команда, —
+            калькулятор подскажет, что делать в этом раунде и сколько денег будет в следующем.
+        </p>
+
+        <section class="panel">
+            <div class="field">
+                <label for="eco-side">Сторона</label>
+                <select id="eco-side">
+                    <option value="t">Террористы (T)</option>
+                    <option value="ct">Спецназ (КТ)</option>
+                </select>
+                <span></span>
+            </div>
+            <div class="field">
+                <label for="eco-money">Мои деньги, $</label>
+                <input type="number" id="eco-money" min="0" max="16000" step="50" value="2400">
+                <span></span>
+            </div>
+            <div class="field">
+                <label for="eco-losses">Проигрышей подряд</label>
+                <input type="range" id="eco-losses" min="0" max="5" value="1">
+                <output id="eco-losses-out"></output>
+            </div>
+        </section>
+
+        <!-- Магазин -->
+        <section class="panel">
+            <div class="shop-header">
+                <h2>🛒 Магазин</h2>
+                <div class="wallet">Осталось: <b id="eco-left"></b></div>
+            </div>
+            <p class="hint">Нажимай на предметы, чтобы купить. Серые — не хватает денег или нельзя взять больше.</p>
+            <!-- Кнопки предметов, разложенные по разделам, нарисует economy.js -->
+            <div id="eco-shop"></div>
+        </section>
+
+        <!-- Что купили -->
+        <section class="panel">
+            <div class="shop-header">
+                <h2>🎒 Твоя закупка</h2>
+                <button class="big-button secondary" id="eco-reset">↺ Сбросить</button>
+            </div>
+            <p class="hint">Нажми на предмет, чтобы продать его обратно.</p>
+            <div id="eco-cart"></div>
+        </section>
+
+        <!-- Деньги в следующем раунде -->
+        <section class="panel">
+            <h2>💵 Деньги в следующем раунде</h2>
+            <p class="hint">Считается от того, что останется после закупки.</p>
+            <div class="stats" id="eco-next"></div>
+        </section>
+
+        <p class="hint">
+            ⚠️ Цифры взяты из гайдов по экономике CS2 и могут поменяться в обновлениях игры.
+            Если что-то не совпадает с игрой — верь игре 🙂
+        </p>
+    </main>
+
+    <script src="economy.js"></script>
+</body>
+</html>

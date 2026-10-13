@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор конфига — CS2</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script src="nav.js"></script>
+
+    <main>
+        <h1>🛠️ Генератор конфига</h1>
+        <p class="tool-intro">
+            Настрой прицел, руки и бинды — сайт соберёт команды для консоли CS2.
+            Их можно скопировать или скачать готовым файлом <code>autoexec.cfg</code>.
+        </p>
+
+        <!-- Прицел -->
+        <section class="panel">
+            <h2>Прицел</h2>
+            <div class="crosshair-layout">
+                <!-- Превью: canvas — «холст», на котором JavaScript рисует прицел -->
+                <canvas id="crosshair-preview" width="320" height="200"></canvas>
+
+                <div>
+                    <div class="field">
+                        <label for="ch-size">Длина</label>
+                        <input type="range" id="ch-size" min="0" max="10" step="0.5" value="2">
+                        <output id="ch-size-out"></output>
+                    </div>
+                    <div class="field">
+                        <label for="ch-thickness">Толщина</label>
+                        <input type="range" id="ch-thickness" min="0" max="3" step="0.5" value="1">
+                        <output id="ch-thickness-out"></output>
+                    </div>
+                    <div class="field">
+                        <label for="ch-gap">Зазор</label>
+                        <input type="range" id="ch-gap" min="-5" max="5" step="0.5" value="-2">
+                        <output id="ch-gap-out"></output>
+                    </div>
+                    <div class="field">
+                        <label for="ch-color">Цвет</label>
+                        <input type="color" id="ch-color" value="#00ff00">
+                        <span></span>
+                    </div>
+                    <label class="check"><input type="checkbox" id="ch-dot"> Точка в центре</label>
+                    <label class="check"><input type="checkbox" id="ch-outline" checked> Чёрная обводка</label>
+                    <label class="check"><input type="checkbox" id="ch-t"> Без верхней палочки (Т-образный)</label>
+                </div>
+            </div>
+
+            <div class="button-row">
+                <span class="hint">Готовые прицелы:</span>
+                <button class="big-button secondary" data-preset="classic">Классика</button>
+                <button class="big-button secondary" data-preset="small">Маленький</button>
+                <button class="big-button secondary" data-preset="dot">Только точка</button>
+                <button class="big-button secondary" data-preset="big">Большой для новичка</button>
+            </div>
+        </section>
+
+        <!-- Руки и общее -->
+        <section class="panel">
+            <h2>Руки и общие настройки</h2>
+            <div class="field">
+                <label for="vm-preset">Положение рук</label>
+                <select id="vm-preset">
+                    <option value="default">Стандартное</option>
+                    <option value="wide" selected>Широкое (руки ниже и дальше, больше видно)</option>
+                    <option value="close">Близкое</option>
+                </select>
+                <span></span>
+            </div>
+            <div class="field">
+                <label for="sens">Чувствительность</label>
+                <input type="number" id="sens" min="0.1" max="10" step="0.01" value="1.25">
+                <span></span>
+            </div>
+            <label class="check"><input type="checkbox" id="opt-fps" checked> Показывать FPS</label>
+            <label class="check"><input type="checkbox" id="opt-rawinput" checked> Не ускорять мышь (как в Windows) — точнее аим</label>
+        </section>
+
+        <!-- Бинды -->
+        <section class="panel">
+            <h2>Бинды гранат</h2>
+            <p class="hint">Каждая граната — на свою клавишу, чтобы не листать колёсиком. Оставь пустым, если не нужно.</p>
+            <div class="field"><label for="bind-smoke">💨 Смок</label><input type="text" id="bind-smoke" value="z" maxlength="10"><span></span></div>
+            <div class="field"><label for="bind-flash">⚡ Флешка</label><input type="text" id="bind-flash" value="x" maxlength="10"><span></span></div>
+            <div class="field"><label for="bind-molotov">🔥 Молотов</label><input type="text" id="bind-molotov" value="c" maxlength="10"><span></span></div>
+            <div class="field"><label for="bind-he">💥 ХАЕ</label><input type="text" id="bind-he" value="v" maxlength="10"><span></span></div>
+        </section>
+
+        <!-- Результат -->
+        <section class="panel">
+            <h2>Готовый конфиг</h2>
+            <textarea id="config-output" class="code-output" readonly></textarea>
+            <div class="button-row">
+                <button class="big-button" id="copy-config">📋 Скопировать</button>
+                <button class="big-button" id="download-config">💾 Скачать autoexec.cfg</button>
+            </div>
+            <p class="hint">
+                <b>Как подключить файл:</b><br>
+                1. Положи <code>autoexec.cfg</code> в папку
+                <code>Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg</code><br>
+                2. В Steam: CS2 → правой кнопкой → Свойства → Параметры запуска → впиши <code>+exec autoexec</code><br>
+                Или просто скопируй команды и вставь их в консоль игры (клавиша <code>~</code>).
+            </p>
+        </section>
+
+        <!-- Тренировочный сервер -->
+        <section class="panel">
+            <h2>🏋️ Тренировочный сервер</h2>
+            <p class="hint">Создай игру с ботами (Играть → Тренировка), отметь нужное и вставь команды в консоль.</p>
+            <label class="check"><input type="checkbox" class="practice" data-cmd="sv_infinite_ammo 1" checked> Бесконечные патроны и гранаты</label>
+            <label class="check"><input type="checkbox" class="practice" data-cmd="sv_grenade_trajectory_prac_pipreview 1" checked> Показывать, куда упадёт граната</label>
+            <label class="check"><input type="checkbox" class="practice" data-cmd="bot_kick" checked> Убрать ботов</label>
+            <label class="check"><input type="checkbox" class="practice" data-cmd="mp_roundtime_defuse 60" checked> Раунд на 60 минут</label>
+            <label class="check"><input type="checkbox" class="practice" data-cmd="mp_buy_anywhere 1" checked> Покупать где угодно</label>
+            <label class="check"><input type="checkbox" class="practice" data-cmd="mp_maxmoney 60000;mp_startmoney 60000" checked> Много денег</label>
+            <label class="check"><input type="checkbox" class="practice" data-cmd="mp_freezetime 0"> Без заморозки в начале раунда</label>
+            <label class="check"><input type="checkbox" class="practice" data-cmd="god"> Бессмертие</label>
+            <textarea id="practice-output" class="code-output" readonly style="min-height: 120px"></textarea>
+            <div class="button-row">
+                <button class="big-button" id="copy-practice">📋 Скопировать</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="config.js"></script>
+</body>
+</html>

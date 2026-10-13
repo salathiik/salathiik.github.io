@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аим-тренер — CS2</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script src="nav.js"></script>
+
+    <main>
+        <h1>🎯 Аим-тренер</h1>
+        <p class="tool-intro">Сбивай мишени как можно быстрее. Попадание в самый центр — <b>хедшот</b>. Промахи снижают точность!</p>
+
+        <!-- Настройки -->
+        <section class="panel aim-settings">
+            <div class="field">
+                <label for="aim-mode">Режим</label>
+                <select id="aim-mode">
+                    <option value="classic">30 секунд — сбей как можно больше</option>
+                    <option value="shrink">Мишени уменьшаются — успей, пока не исчезла</option>
+                    <option value="moving">Двигающиеся мишени</option>
+                    <option value="reaction">Реакция — 10 мишеней, важна скорость</option>
+                </select>
+                <span></span>
+            </div>
+            <div class="field">
+                <label for="aim-map">Карта на фоне</label>
+                <select id="aim-map">
+                    <option value="dust2">Dust 2</option>
+                    <option value="mirage">Mirage</option>
+                    <option value="inferno">Inferno</option>
+                    <option value="ancient">Ancient</option>
+                    <option value="overpass">Overpass</option>
+                    <option value="none">Без фона</option>
+                </select>
+                <span></span>
+            </div>
+            <div class="field">
+                <label for="aim-size">Размер мишеней</label>
+                <input type="range" id="aim-size" min="10" max="50" value="26">
+                <output id="aim-size-out"></output>
+            </div>
+            <label class="check"><input type="checkbox" id="aim-sound" checked> Звук попадания</label>
+        </section>
+
+        <!-- Игровое поле. Кнопка «Старт», табло и всё остальное рисуются прямо на нём -->
+        <canvas id="aim-canvas" width="960" height="540"></canvas>
+
+        <!-- Итоги -->
+        <section class="panel" id="aim-result" hidden>
+            <h2>Итоги</h2>
+            <div class="stats" id="result-stats"></div>
+            <p id="result-record" class="hint"></p>
+        </section>
+    </main>
+
+    <script src="aim.js"></script>
+</body>
+</html>
